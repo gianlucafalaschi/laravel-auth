@@ -54,9 +54,20 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Project $project) // versione con dependecy injection
     {
-        //
+       
+
+       $data = [
+        'project' => $project
+
+       ];
+       
+       // dd($data);
+
+       return view('admin.projects.show', $data);
+       // return view('admin.projects.show', compact('project'));
+
     }
 
     /**
