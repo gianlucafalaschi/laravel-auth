@@ -3,6 +3,12 @@
 @section('content')
     <h1>Progetto singolo</h1>
     <h2>Nome Progetto: {{ $project->name }}</h2>
+    {{-- messaggio di creazione progetto --}}
+    @if (session()->has('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
     <div>
         <strong>Slug:</strong> {{ $project->slug }}

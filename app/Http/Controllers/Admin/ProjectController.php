@@ -51,12 +51,21 @@ class ProjectController extends Controller
         $formData = $request->all();
         //dd($formData);
         $newProject = new Project();
-        $newProject->name = $formData['name'];
+        //senza fillable
+        
+        // $newProject->name = $formData['name'];
+        // $newProject->slug = Str::slug($newProject->name , '-');
+        // $newProject->client_name = $formData['client_name'];
+        // $newProject->summary = $formData['summary'];
+        // $newProject->save();
+
+        // con fillable
+        $newProject->fill($formData);
         $newProject->slug = Str::slug($newProject->name , '-');
-        $newProject->client_name = $formData['client_name'];
-        $newProject->summary = $formData['summary'];
         $newProject->save();
         
+        // messaggio flash creazione progetto
+        session()->flash('success', 'Progetto creato con successo!'); 
 
         return redirect()->route('admin.projects.show', ['project' => $newProject->id]);
 
@@ -90,9 +99,16 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit(Project $project)
+    {   
+        //dd($project);
+
+        $data = [
+            'project'=> $project
+        ];
+        
+
+        return view('admin.projects.edit', $data);
     }
 
     /**
@@ -102,9 +118,18 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, Project $project)
+    {   
+
+        $formData = $request->all();
+        // dd($formData);
+        
+        $project->slug = Str::slug($formData['name'] , '-');
+        $project->update($formData);
+
+
+        return redirect()->route('admin.projects.show', ['project' => $project->id]);
+
     }
 
     /**
