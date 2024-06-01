@@ -11,6 +11,10 @@
     @endif
 
     <div>
+        <strong>ID:</strong> {{ $project->id }}
+    </div>
+    
+    <div>
         <strong>Slug:</strong> {{ $project->slug }}
     </div>
     
