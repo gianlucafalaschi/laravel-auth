@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
@@ -47,9 +48,18 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $formDate = $request->all();
+        $formData = $request->all();
+        //dd($formData);
+        $newProject = new Project();
+        $newProject->name = $formData['name'];
+        $newProject->slug = Str::slug($newProject->name , '-');
+        $newProject->client_name = $formData['client_name'];
+        $newProject->summary = $formData['summary'];
+        $newProject->save();
+        
 
-        dd($formDate);
+        return redirect()->route('admin.projects.show', ['project' => $newProject->id]);
+
     }
 
     /**
