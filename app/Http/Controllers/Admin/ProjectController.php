@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule; // per usare la classe rule in update nella validazione
+
 
 class ProjectController extends Controller
 {
@@ -58,7 +60,7 @@ class ProjectController extends Controller
         [
             'name.required' => 'Add a name',
             'name.min' => 'Minimum 5 character',
-            'name.max' => 'Mininum 200 characters', 
+            'name.max' => 'Maximum 200 characters', 
             'name.unique' => 'This name already exists', 
             'client_name.required' => 'Add a client name', 
             'client_name.min' => 'Minimum 5 characters', 
@@ -145,15 +147,24 @@ class ProjectController extends Controller
 
         // validazione dei dati del form prima di proseguire con il resto del codice
         $validated = $request->validate([
-            'name' => 'required|unique:projects,name|min:5|max:200',   // unique vuole il nome della tabella e il nome della colonna
+            //'name' => 'required|unique:projects,name|min:5|max:200',   // unique vuole il nome della tabella e il nome della colonna
+            // uso questa sintassi per permettere di ignorare la regola del nome unique quando un project e' modificato
+            //Forcing A Unique Rule To Ignore A Given ID:    https://laravel.com/docs/9.x/validation#introduction
+            'name' => [
+                'required',
+                'min:5',
+                'max:200',
+                //'unique:projects,name'
+                Rule::unique('projects')->ignore($project->id),
+            ],
             'client_name' => 'required|min:5|max:250',
             'summary' => 'nullable|min:10|max:500|',
         ],
-        
+        // custom error message
         [
             'name.required' => 'Add a name',
             'name.min' => 'Minimum 5 character',
-            'name.max' => 'Mininum 200 characters', 
+            'name.max' => 'Maximum 200 characters', 
             'name.unique' => 'This name already exists', 
             'client_name.required' => 'Add a client name', 
             'client_name.min' => 'Minimum 5 characters', 
