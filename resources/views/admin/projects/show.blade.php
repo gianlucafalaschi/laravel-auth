@@ -30,4 +30,18 @@
         <p class="mt-3">Descrizione: {{ $project->summary }}</p>
     @endif
 
+    <div class="d-flex gap-4">
+        <div>
+            <a class="btn btn-primary" href="{{ route('admin.projects.edit', ['project' => $project->id]) }}">Edit</a>
+        </div>
+        <div>
+            <form action="{{ route('admin.projects.destroy', ['project' => $project->id]) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                
+                <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+    
+
 @endsection

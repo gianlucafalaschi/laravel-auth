@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<h1>sono il create</h1>
+<h1>Create a new project</h1>
 
 <form action="{{ route('admin.projects.store') }}" method="POST">
     @csrf
