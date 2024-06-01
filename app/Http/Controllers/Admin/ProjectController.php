@@ -57,9 +57,9 @@ class ProjectController extends Controller
         
         [
             'name.required' => 'Add a name',
-            'name.min' => 'Minimo 5 caratteri',
+            'name.min' => 'Minimum 5 character',
             'name.max' => 'Mininum 200 characters', 
-            'name.unique' => 'Il nome esiste già', 
+            'name.unique' => 'This name already exists', 
             'client_name.required' => 'Add a client name', 
             'client_name.min' => 'Minimum 5 characters', 
             'client_name.max' => 'Maximum 250 characters', 
@@ -152,9 +152,9 @@ class ProjectController extends Controller
         
         [
             'name.required' => 'Add a name',
-            'name.min' => 'Minimo 5 caratteri',
+            'name.min' => 'Minimum 5 character',
             'name.max' => 'Mininum 200 characters', 
-            'name.unique' => 'Il nome esiste già', 
+            'name.unique' => 'This name already exists', 
             'client_name.required' => 'Add a client name', 
             'client_name.min' => 'Minimum 5 characters', 
             'client_name.max' => 'Maximum 250 characters', 
