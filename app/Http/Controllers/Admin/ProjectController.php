@@ -33,8 +33,10 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {   
+
+
+        return view('admin.projects.create');
     }
 
     /**
@@ -45,7 +47,9 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $formDate = $request->all();
+
+        dd($formDate);
     }
 
     /**
