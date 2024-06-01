@@ -3,7 +3,7 @@
 @section('content')
     <h1>Progetto singolo</h1>
     <h2>Nome Progetto: {{ $project->name }}</h2>
-    {{-- messaggio di creazione progetto --}}
+    {{-- messaggio di creazione progetto o modifica progetto --}}
     @if (session()->has('success'))
         <div class="alert alert-success">
             {{ session('success') }}

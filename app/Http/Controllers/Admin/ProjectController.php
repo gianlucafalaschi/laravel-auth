@@ -65,7 +65,7 @@ class ProjectController extends Controller
         $newProject->save();
         
         // messaggio flash creazione progetto
-        session()->flash('success', 'Progetto creato con successo!'); 
+        session()->flash('success', 'Project created!'); 
 
         return redirect()->route('admin.projects.show', ['project' => $newProject->id]);
 
@@ -127,6 +127,9 @@ class ProjectController extends Controller
         $project->slug = Str::slug($formData['name'] , '-');
         $project->update($formData);
 
+
+        // messaggio flash creazione progetto
+        session()->flash('success', 'Project modified!'); 
 
         return redirect()->route('admin.projects.show', ['project' => $project->id]);
 
