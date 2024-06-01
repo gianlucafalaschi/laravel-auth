@@ -47,7 +47,29 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+         // validazione dei dati del form prima di proseguire con il resto del codice
+        $validated = $request->validate([
+            'name' => 'required|unique:projects,name|min:5|max:200',   // unique vuole il nome della tabella e il nome della colonna
+            'client_name' => 'required|min:5|max:250',
+            'summary' => 'nullable|min:10|max:500|',
+        ],
+        
+        [
+            'name.required' => 'Add a name',
+            'name.min' => 'Minimo 5 caratteri',
+            'name.max' => 'Mininum 200 characters', 
+            'name.unique' => 'Il nome esiste già', 
+            'client_name.required' => 'Add a client name', 
+            'client_name.min' => 'Minimum 5 characters', 
+            'client_name.max' => 'Maximum 250 characters', 
+            'summary.min' => 'Minimum 10 characters', 
+            'summary.max' => 'Maximum 500 characters', 
+
+        ]
+        
+    );
+
         $formData = $request->all();
         //dd($formData);
         $newProject = new Project();
