@@ -63,7 +63,7 @@
                             <li class="nav-item">
                                 {{-- se il nome della route corrente è admin.projects.index applico la classe bg-secondary come sfondo altrimenti stringa vuota  --}}
                                 <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.projects.create' ? 'bg-secondary' : '' }}" href="{{ route('admin.projects.create')}}">
-                                    <i class="fa-solid fa-plus"></i> Create
+                                    <i class="fa-solid fa-plus"></i> Create projects
                                 </a>
                             </li>
                         </ul>
