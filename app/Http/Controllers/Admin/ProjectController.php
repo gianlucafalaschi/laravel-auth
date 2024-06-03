@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
-use Illuminate\Support\Str;
+use Illuminate\Support\Str;   // per usare gli l'helpers (si occupa di manipolare le stringhe, in questo caso lo uso per lo slug)
 use Illuminate\Validation\Rule; // per usare la classe rule in update nella validazione
 
 
@@ -84,14 +84,14 @@ class ProjectController extends Controller
         // $newProject->save();
 
         // con fillable
-        $newProject->fill($formData);
-        $newProject->slug = Str::slug($newProject->name , '-');
-        $newProject->save();
+        $newProject->fill($formData);   // usando il fillable ricordarsi di autorizzare le colonne fillabili nel model
+        $newProject->slug = Str::slug($newProject->name , '-');  // se uso $newProject->name prima del fill avrei valore vuoto, dovrei usare invece $formData
+        $newProject->save();  // laravel crea una nuova riga del database
         
         // messaggio flash creazione progetto
         session()->flash('success', 'Project created!'); 
-
-        return redirect()->route('admin.projects.show', ['project' => $newProject->id]);
+         // una volta creata una nuova riga del database vengo reindrizzato alla pagina del singolo prodotto creato. Uso ilredirect allo show e non il view allo show per tenere i compiti divisi.
+        return redirect()->route('admin.projects.show', ['project' => $newProject->id]);  
 
     }
 
@@ -179,14 +179,14 @@ class ProjectController extends Controller
         $formData = $request->all();
         // dd($formData);
         
-        $project->slug = Str::slug($formData['name'] , '-');
+        $project->slug = Str::slug($formData['name'] , '-'); // se usassi $project invece di formData farei lo slug sul valore vecchio
         $project->update($formData);
 
 
         // messaggio flash creazione progetto
         session()->flash('success', 'Project modified!'); 
 
-        return redirect()->route('admin.projects.show', ['project' => $project->id]);
+        return redirect()->route('admin.projects.show', ['project' => $project->id]); // mostrare la pagina show e' compito di show, non di update, per questo faccio il redirect a show (che fara' view) e non faccio view direttamente
 
     }
 
@@ -203,7 +203,7 @@ class ProjectController extends Controller
         
         
         return redirect()->route('admin.projects.index');
-        //return redirect()->route('admin.projects.index');
+       
 
     }
 }

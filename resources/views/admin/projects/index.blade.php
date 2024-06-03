@@ -30,10 +30,11 @@
                             <a href="{{ route('admin.projects.edit', ['project' => $project->id]) }}">Edit</a>
                         </div>
                         <div>
+                            {{-- il delete non puP' essere un link, deve essere un form, perche' i link funzionano solo con method GET --}}
                             <form action="{{ route('admin.projects.destroy', ['project' => $project->id]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                
+
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
                         </div>

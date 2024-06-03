@@ -44,7 +44,8 @@
                 @method('DELETE')
                 
                 <button type="submit" class="btn btn-danger">Delete</button>
-        </form>
+            </form>
+        </div>
     </div>
     
 
