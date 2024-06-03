@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use Illuminate\Support\Str;   // per usare gli l'helpers (si occupa di manipolare le stringhe, in questo caso lo uso per lo slug)
-use Illuminate\Validation\Rule; // per usare la classe rule in update nella validazione
+use Illuminate\Validation\Rule; // per usare la classe rule in update nella validazione 
 
 
 class ProjectController extends Controller
@@ -155,7 +155,7 @@ class ProjectController extends Controller
                 'min:5',
                 'max:200',
                 //'unique:projects,name'
-                Rule::unique('projects')->ignore($project->id),
+                Rule::unique('projects')->ignore($project->id),   // non applicare la regola se il nome uguale allo stesso post che sto' modificando 
             ],
             'client_name' => 'required|min:5|max:250',
             'summary' => 'nullable|min:10|max:500|',
