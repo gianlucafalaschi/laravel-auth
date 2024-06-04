@@ -19,6 +19,9 @@
           <label for="cover_image" class="form-label">Image</label>
           <input class="form-control" type="file" id="cover_image" name="cover_image">
         </div>
+        @error('cover_image')
+          <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
 
         {{-- mostro l'immagine se presente nel database, altrimenti scrivo che nessuma immagine e' caricata  --}}
         @if ($project->cover_image)

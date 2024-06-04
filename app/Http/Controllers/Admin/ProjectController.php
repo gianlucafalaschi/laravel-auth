@@ -57,6 +57,7 @@ class ProjectController extends Controller
             'name' => 'required|unique:projects,name|min:5|max:200',   // unique vuole il nome della tabella e il nome della colonna
             'client_name' => 'required|min:5|max:250',
             'summary' => 'nullable|min:10|max:500|',
+            'cover_image' => 'nullable|image|max:512'
         ],
         
         [
@@ -174,6 +175,7 @@ class ProjectController extends Controller
             ],
             'client_name' => 'required|min:5|max:250',
             'summary' => 'nullable|min:10|max:500|',
+            'cover_image' => 'nullable|image|max:512'
         ],
         // custom error message
         [
