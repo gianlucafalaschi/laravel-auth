@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Project;
 use Illuminate\Support\Str;   // per usare gli l'helpers (si occupa di manipolare le stringhe, in questo caso lo uso per lo slug)
 use Illuminate\Validation\Rule; // per usare la classe rule in update nella validazione 
-
+use Illuminate\Support\Facades\Storage;  // per usare la classe Storage nello store ( per l'upload dei file)
 
 class ProjectController extends Controller
 {
@@ -50,6 +50,8 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {   
+        
+
          // validazione dei dati del form prima di proseguire con il resto del codice
         $validated = $request->validate([
             'name' => 'required|unique:projects,name|min:5|max:200',   // unique vuole il nome della tabella e il nome della colonna
@@ -74,6 +76,19 @@ class ProjectController extends Controller
 
         $formData = $request->all();
         //dd($formData);
+
+        // solo se l'utente ha caricato la cover image
+        if($request->hasFile('cover_image')) {
+            // upload del file nella cartella pubblica -  project_images è la sottocartella di public che mi crea, $formData['cover_image'] è la chiave dove c'è il file, è un'istanza di UploadedFile
+            $img_path = Storage::disk('public')->put('project_images', $formData['cover_image']);
+            dd($img_path);
+            // salvare nella colonna cover_image del db il path all'immagine caricata
+
+        }
+        
+
+
+
         $newProject = new Project();
         //senza fillable
         
