@@ -193,6 +193,20 @@ class ProjectController extends Controller
 
         $formData = $request->all();
         // dd($formData);
+
+        // solo se l'utente ha caricato una nuova la cover image
+        if($request->hasFile('cover_image')) {
+            //se c'era gia una cover image la cancello dallo storage
+            if($project->cover_image) { 
+                Storage::delete($project->cover_image); 
+            }
+
+            // upload del file nella cartella pubblica -  project_images è la sottocartella di public che mi crea, $formData['cover_image'] è la chiave dove c'è il file, è un'istanza di UploadedFile
+            $img_path = Storage::disk('public')->put('project_images', $formData['cover_image']);
+            // salvare nella colonna cover_image del db il path all'immagine caricata
+            $formData['cover_image'] = $img_path;
+            
+        }
         
         $project->slug = Str::slug($formData['name'] , '-'); // se usassi $project invece di formData farei lo slug sul valore vecchio
         $project->update($formData);
