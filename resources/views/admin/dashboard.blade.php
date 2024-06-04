@@ -20,10 +20,10 @@
                     {{ __('You are logged in!') }}
 
                     <div>
-                        Benvenuto: {{ $user->name }}
+                        Welcome: {{ $user->name }}
                     </div>
                     <div>
-                        Ti sei loggato con la seguente email: {{ $user->email }}
+                        Your are logged in with the following email: {{ $user->email }}
                     </div>
                     
                 </div>

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1>Edit project: {{ $project->name }}</h1>
+    <h1>Edit project:<br> {{ $project->name }}</h1>
 
     <form action="{{ route('admin.projects.update', ['project' => $project->id]) }}" method="POST">
         @csrf

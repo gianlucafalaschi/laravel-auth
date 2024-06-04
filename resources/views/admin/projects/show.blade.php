@@ -1,8 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1>Progetto singolo</h1>
-    <h2>Nome Progetto: {{ $project->name }}</h2>
+    <h1>{{ $project->name }}</h1>
     {{-- messaggio di creazione progetto o modifica progetto --}}
     @if (session()->has('success'))
         <div class="alert alert-success">
@@ -19,19 +18,19 @@
     </div>
     
     <div>
-        <strong>Client name:</strong>:</strong> {{ $project->client_name }}
+        <strong>Client name:</strong></strong> {{ $project->client_name }}
     </div>
     
     <div>
-        <strong>Data creazione:</strong>:</strong> {{ $project->created_at }}
+        <strong>Created on:</strong></strong> {{ $project->created_at }}
     </div>
    
     <div>
-        <strong>Data modifica:</strong>:</strong> {{ $project->updated_at }}
+        <strong>Modified on:</strong></strong> {{ $project->updated_at }}
     </div>
 
     @if ($project->summary)
-        <p class="mt-3">Descrizione: {{ $project->summary }}</p>
+        <p class="mt-3"><strong>Description: <br></strong>{{ $project->summary }}</p>
     @endif
 
     <div class="d-flex gap-4">
