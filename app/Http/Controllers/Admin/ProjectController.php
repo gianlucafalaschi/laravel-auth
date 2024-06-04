@@ -81,9 +81,9 @@ class ProjectController extends Controller
         if($request->hasFile('cover_image')) {
             // upload del file nella cartella pubblica -  project_images è la sottocartella di public che mi crea, $formData['cover_image'] è la chiave dove c'è il file, è un'istanza di UploadedFile
             $img_path = Storage::disk('public')->put('project_images', $formData['cover_image']);
-            dd($img_path);
             // salvare nella colonna cover_image del db il path all'immagine caricata
-
+            $formData['cover_image'] = $img_path;
+            
         }
         
 
